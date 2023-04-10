@@ -10,8 +10,14 @@ router.get('/:id', (req, res) => {
 
   return (diary != null) ? res.send(diary) : res.sendStatus(404)
 })
-router.post('/', (_req, res) => {
-  res.send('Saving a diary')
+
+// TODO: ADD VALIDATIONS FOR POST REQUEST
+router.post('/', (req, res) => {
+  const { date, weather, visibility, comment } = req.body
+
+  const newDiaryEntry = diaryServices.addDiary({ date, weather, visibility, comment })
+
+  res.json(newDiaryEntry)
 })
 
 export default router
